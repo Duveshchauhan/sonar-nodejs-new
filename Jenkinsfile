@@ -1,25 +1,11 @@
-pipeline{
- agent any
- stages{
-  stage('Checkout') {
-    steps {
-            git branch: 'main',url: 'https://gitlab.com/Ria-30/pipelines-javascript.git'
-          }
+node {
+  stage('SCM') {
+    checkout scm
   }
-  stage('Build'){
-    steps {
-      sh 'npm i'
+  stage('SonarQube Analysis') {
+    def scannerHome = tool 'SonarScanner';
+    withSonarQubeEnv() {
+      sh "${scannerHome}/bin/sonar-scanner"
     }
   }
-  stage('Deploy'){
-    steps {
-      sh 'npm start'
-    }
-  }
-  stage('SonarQube Analysis'){
-    steps {
-      sh '
-    }
-  }
- }
 }
