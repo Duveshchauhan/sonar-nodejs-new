@@ -7,7 +7,7 @@ node {
     withSonarQubeEnv() {
       sh "${scannerHome}/sonar-scanner"
     }
-    withSonarQubeEnv() {
+    withSonarQubeEnv('SonarQube') {
   // sh "ls ${scannerHome}"
   // sh "echo ${scannerHome}"
      
